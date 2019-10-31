@@ -1,0 +1,16 @@
+<mat-toolbar>{{(item && item.id)?'Editar Item':'Cadastrar Item'}}</mat-toolbar>
+
+<div class="componente-container">
+    <form class="form-padrao" *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="formGroup.valid && salvar()"
+        novalidate>
+        <mat-form-field>
+            <input matInput placeholder="Nome" formControlName="nome" required autocomplete="off">
+            <mat-error>Campo é obrigatório</mat-error>
+        </mat-form-field>
+        <div class="linha-botoes">
+            <button mat-raised-button color="primary" [disabled]="!formGroup.valid">Salvar</button>
+            <button *ngIf="item && item.id" type="button" color="warn" mat-raised-button (click)="deletar()">Deletar</button>
+            <button type="button" mat-raised-button routerLink="/itens">Cancelar</button>
+        </div>
+    </form>
+</div>
