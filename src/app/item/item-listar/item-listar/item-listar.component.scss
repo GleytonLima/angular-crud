@@ -1,3 +1,22 @@
 table {
     width: 100%;
 }
+
+.table-container {
+    min-height: 300px;
+    max-height: 300px;
+    overflow: auto !important;
+    background-color: white;;
+}
+
+.spinner {
+    position: relative;
+    margin-left: 45%;
+    margin-top: 10%;
+}
+
+.mensagem-sem-registros {
+    position: relative;
+    margin-left: 30%;
+    margin-top: 10%;
+}

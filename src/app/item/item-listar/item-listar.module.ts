@@ -8,6 +8,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [ItemListarComponent],
@@ -17,7 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatTableModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatPaginatorModule
   ]
 })
 export class ItemListarModule { }

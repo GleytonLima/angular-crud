@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginatorIntlPtBr } from './_util/paginator-ptbr-i8n';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatListModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+      {provide: MatPaginatorIntl, useClass: MatPaginatorIntlPtBr}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

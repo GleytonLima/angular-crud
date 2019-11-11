@@ -1,28 +1,36 @@
 <mat-toolbar>Lista de Itens</mat-toolbar>
 
-<ng-template #carregando>
-    <mat-spinner></mat-spinner>
-</ng-template>
-
 <div class="componente-container">
-    <div *ngIf="itens$ | async as itens; else carregando">
-        <table mat-table [dataSource]="itens">
+    <div class="table-container">
+        <table mat-table [dataSource]="page.content">
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> ID </th>
                 <td mat-cell *matCellDef="let item">
-                    <a routerLink="/itens/editar/{{item.id}}"> {{item.id}}</a> 
+                    <a routerLink="/itens/editar/{{item.id}}"> {{item.id}}</a>
                 </td>
             </ng-container>
             <ng-container matColumnDef="nome">
                 <th mat-header-cell *matHeaderCellDef> Nome </th>
                 <td mat-cell *matCellDef="let item">
-                    <a routerLink="/itens/editar/{{item.id}}"> {{item.nome}}</a> 
+                    <a routerLink="/itens/editar/{{item.id}}"> {{item.nome}}</a>
                 </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>
-            <tr mat-row *matRowDef="let row; columns: colunasTabela;"></tr>
+            <tr mat-row *matRowDef="let row; columns: colunasTabela;" [hidden]="carregando"></tr>
         </table>
+        <div *ngIf="carregando" class="spinner">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div *ngIf="!carregando && page.totalElements === 0" class="mensagem-sem-registros">
+            Nenhum registro carregado
+        </div>
     </div>
+    <mat-paginator *ngIf="page.totalElements > 0"  
+            [length]="page.totalElements" 
+            [pageSize]="5" 
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            (page)="pageEvent = $event; listarItens()">
+        </mat-paginator>
     <div class="linha-botoes">
         <button mat-raised-button color="primary" routerLink="/itens/cadastrar">Cadastrar</button>
     </div>
