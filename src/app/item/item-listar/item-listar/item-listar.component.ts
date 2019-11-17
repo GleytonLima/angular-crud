@@ -4,6 +4,7 @@ import { Item } from '../../item.model';
 import { Page, PageRequest } from 'src/app/_util/Pagination';
 import { PageEvent } from '@angular/material/paginator';
 import { take } from 'rxjs/operators';
+import { Sort } from '@angular/material/sort';
 
 @Component({
     selector: 'app-item-listar',
@@ -16,6 +17,7 @@ export class ItemListarComponent implements OnInit {
 
     page: Page<Item> = new Page([], 0);
     pageEvent: PageEvent;
+    sortEvent: Sort;
 
     carregando = false;
 
@@ -33,6 +35,10 @@ export class ItemListarComponent implements OnInit {
                 {
                     pageNumber: this.pageEvent? this.pageEvent.pageIndex: 0,
                     pageSize: this.pageEvent? this.pageEvent.pageSize: 5
+                },
+                {
+                    property: this.sortEvent?this.sortEvent.active: "id",
+                    direction: this.sortEvent?this.sortEvent.direction: "asc"
                 },
                 queryAdicional
             )
