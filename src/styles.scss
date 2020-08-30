@@ -9,12 +9,27 @@
     flex-direction: column;
 }
 
-.form-padrao>* {
+.form-padrao > * {
     width: 100%;
 }
 
 .componente-container {
     padding: 15px;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.red-snackbar {
+    background: rgb(250, 84, 84);
+}
+
+.green-snackbar {
+    background: rgb(67, 156, 106);
+}
