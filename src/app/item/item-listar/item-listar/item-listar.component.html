@@ -1,22 +1,31 @@
 <mat-toolbar>Lista de Itens</mat-toolbar>
 
 <div class="componente-container">
+    <form [formGroup]="formGroupPesquisa" (ngSubmit)="formGroupPesquisa.valid && listarItens()">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <mat-form-field>
+                <input matInput placeholder="Nome" formControlName="nome" autocomplete="off" />
+            </mat-form-field>
+            <button mat-raised-button color="primary">Pesquisar</button>
+            <button mat-raised-button type="button" color="secondary" (click)="limparPesquisa()">Limpar</button>
+        </div>
+    </form>
     <div class="table-container">
-        <table mat-table [dataSource]="page.content" matSort (matSortChange)="sortEvent = $event; listarItens();">
+        <table mat-table [dataSource]="page.content" matSort (matSortChange)="sortEvent = $event; listarItens()">
             <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
                 <td mat-cell *matCellDef="let item">
-                    <a routerLink="/itens/editar/{{item.id}}"> {{item.id}}</a>
+                    <a routerLink="/itens/editar/{{ item.id }}"> {{ item.id }}</a>
                 </td>
             </ng-container>
             <ng-container matColumnDef="nome">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
                 <td mat-cell *matCellDef="let item">
-                    <a routerLink="/itens/editar/{{item.id}}"> {{item.nome}}</a>
+                    <a routerLink="/itens/editar/{{ item.id }}"> {{ item.nome }}</a>
                 </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>
-            <tr mat-row *matRowDef="let row; columns: colunasTabela;" [hidden]="carregando"></tr>
+            <tr mat-row *matRowDef="let row; columns: colunasTabela" [hidden]="carregando"></tr>
         </table>
         <div *ngIf="carregando" class="spinner">
             <mat-spinner></mat-spinner>
@@ -25,12 +34,14 @@
             Nenhum registro carregado
         </div>
     </div>
-    <mat-paginator *ngIf="page.totalElements > 0"  
-            [length]="page.totalElements" 
-            [pageSize]="5" 
-            [pageSizeOptions]="[5, 10, 25, 100]"
-            (page)="pageEvent = $event; listarItens()">
-        </mat-paginator>
+    <mat-paginator
+        *ngIf="page.totalElements > 0"
+        [length]="page.totalElements"
+        [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        (page)="pageEvent = $event; listarItens()"
+    >
+    </mat-paginator>
     <div class="linha-botoes">
         <button mat-raised-button color="primary" routerLink="/itens/cadastrar">Cadastrar</button>
     </div>

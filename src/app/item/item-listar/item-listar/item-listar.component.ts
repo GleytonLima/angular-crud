@@ -6,6 +6,7 @@ import { PageEvent } from "@angular/material/paginator";
 import { take } from "rxjs/operators";
 import { Sort } from "@angular/material/sort";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
     selector: "app-item-listar",
@@ -21,15 +22,28 @@ export class ItemListarComponent implements OnInit {
 
     carregando = false;
 
-    constructor(private itemService: ItemService, private matSnackBar: MatSnackBar) {}
+    formGroupPesquisa: FormGroup;
+
+    constructor(private itemService: ItemService, private matSnackBar: MatSnackBar, private formBuilder: FormBuilder) {}
 
     ngOnInit() {
+        this.formGroupPesquisa = this.formBuilder.group({
+            nome: [null],
+        });
+        this.listarItens();
+    }
+
+    limparPesquisa() {
+        this.formGroupPesquisa.reset();
         this.listarItens();
     }
 
     listarItens() {
         this.carregando = true;
-        let queryAdicional;
+        const queryAdicional = new Map();
+        if (this.formGroupPesquisa.value.nome) {
+            queryAdicional.set("nome_like", this.formGroupPesquisa.value.nome);
+        }
         this.itemService
             .listar(
                 new PageRequest(
