@@ -1,4 +1,4 @@
-<mat-toolbar>Lista de Itens</mat-toolbar>
+<mat-toolbar><h1>Lista de Itens</h1></mat-toolbar>
 
 <div class="componente-container">
     <form [formGroup]="formGroupPesquisa" (ngSubmit)="formGroupPesquisa.valid && listarItens()">
@@ -12,14 +12,17 @@
     </form>
     <div class="table-container">
         <table mat-table [dataSource]="page.content" matSort (matSortChange)="sortEvent = $event; listarItens()">
+            <caption class="clipped">
+                Tabela com uma lista de itens
+            </caption>
             <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
                 <td mat-cell *matCellDef="let item">
                     <a routerLink="/itens/editar/{{ item.id }}"> {{ item.id }}</a>
                 </td>
             </ng-container>
             <ng-container matColumnDef="nome">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+                <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
                 <td mat-cell *matCellDef="let item">
                     <a routerLink="/itens/editar/{{ item.id }}"> {{ item.nome }}</a>
                 </td>
