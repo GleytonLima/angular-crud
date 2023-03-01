@@ -10,7 +10,6 @@ import { MatButtonModule } from '@angular/material/button';
         CommonModule,
         MatDialogModule,
         MatButtonModule
-    ],
-    entryComponents: [DialogoConfirmacaoComponent]
+    ]
 })
 export class DialogoConfirmacaoModule { }
