@@ -4,8 +4,8 @@ import { ItemService } from "../../item.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Item } from "../../item.model";
 import { DialogoConfirmacaoComponent } from "src/app/_shared/dialogo-confirmacao/dialogo-confirmacao.component";
-import { MatDialog } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatLegacyDialog as MatDialog } from "@angular/material/legacy-dialog";
+import { MatLegacySnackBar as MatSnackBar } from "@angular/material/legacy-snack-bar";
 
 @Component({
     selector: "app-item-cadastrar-editar",

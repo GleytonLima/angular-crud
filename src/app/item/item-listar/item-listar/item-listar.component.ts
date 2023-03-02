@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { ItemService } from "../../item.service";
 import { Item } from "../../item.model";
 import { Page, PageRequest } from "src/app/_util/Pagination";
-import { PageEvent } from "@angular/material/paginator";
+import { LegacyPageEvent as PageEvent } from "@angular/material/legacy-paginator";
 import { take } from "rxjs/operators";
 import { Sort } from "@angular/material/sort";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatLegacySnackBar as MatSnackBar } from "@angular/material/legacy-snack-bar";
 import { UntypedFormGroup, UntypedFormBuilder } from "@angular/forms";
 
 @Component({
