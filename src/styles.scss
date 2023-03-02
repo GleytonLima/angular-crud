@@ -27,11 +27,11 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .red-snackbar {
-    background: rgb(250, 84, 84);
+    --mdc-snackbar-container-color: rgb(250, 84, 84);
 }
 
 .green-snackbar {
-    background: rgb(67, 156, 106);
+    --mdc-snackbar-container-color: rgb(67, 156, 106);
 }
 
 .clipped {

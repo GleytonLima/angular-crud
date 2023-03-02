@@ -24,7 +24,11 @@ export class ItemListarComponent implements OnInit {
 
     formGroupPesquisa: UntypedFormGroup;
 
-    constructor(private itemService: ItemService, private matSnackBar: MatSnackBar, private formBuilder: UntypedFormBuilder) {}
+    constructor(
+        private itemService: ItemService,
+        private matSnackBar: MatSnackBar,
+        private formBuilder: UntypedFormBuilder
+    ) {}
 
     ngOnInit() {
         this.formGroupPesquisa = this.formBuilder.group({
@@ -59,19 +63,19 @@ export class ItemListarComponent implements OnInit {
                 )
             )
             .pipe(take(1))
-            .subscribe(
-                (page) => {
+            .subscribe({
+                next: (page) => {
                     this.page = page;
                     this.carregando = false;
                 },
-                (error) => {
+                error: (error) => {
                     this.page = new Page([], 0);
                     this.carregando = false;
                     this.matSnackBar.open("Erro ao listar itens", null, {
                         duration: 5000,
                         panelClass: "red-snackbar",
                     });
-                }
-            );
+                },
+            });
     }
 }
