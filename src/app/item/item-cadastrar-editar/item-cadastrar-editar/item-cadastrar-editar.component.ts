@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from "@angular/forms";
 import { ItemService } from "../../item.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Item } from "../../item.model";
@@ -12,11 +12,11 @@ import { MatSnackBar } from "@angular/material/snack-bar";
     templateUrl: "./item-cadastrar-editar.component.html",
 })
 export class ItemCadastrarEditarComponent implements OnInit {
-    formGroup: FormGroup;
+    formGroup: UntypedFormGroup;
     item: Item;
 
     constructor(
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         private itemService: ItemService,
         private router: Router,
         private activatedRoute: ActivatedRoute,

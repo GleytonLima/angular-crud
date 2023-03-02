@@ -6,7 +6,7 @@ import { PageEvent } from "@angular/material/paginator";
 import { take } from "rxjs/operators";
 import { Sort } from "@angular/material/sort";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { UntypedFormGroup, UntypedFormBuilder } from "@angular/forms";
 
 @Component({
     selector: "app-item-listar",
@@ -22,9 +22,9 @@ export class ItemListarComponent implements OnInit {
 
     carregando = false;
 
-    formGroupPesquisa: FormGroup;
+    formGroupPesquisa: UntypedFormGroup;
 
-    constructor(private itemService: ItemService, private matSnackBar: MatSnackBar, private formBuilder: FormBuilder) {}
+    constructor(private itemService: ItemService, private matSnackBar: MatSnackBar, private formBuilder: UntypedFormBuilder) {}
 
     ngOnInit() {
         this.formGroupPesquisa = this.formBuilder.group({
