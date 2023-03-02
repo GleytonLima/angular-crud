@@ -4,8 +4,8 @@ import { ItemService } from "../../item.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Item } from "../../item.model";
 import { DialogoConfirmacaoComponent } from "src/app/_shared/dialogo-confirmacao/dialogo-confirmacao.component";
-import { MatLegacyDialog as MatDialog } from "@angular/material/legacy-dialog";
-import { MatLegacySnackBar as MatSnackBar } from "@angular/material/legacy-snack-bar";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
     selector: "app-item-cadastrar-editar",
@@ -34,37 +34,37 @@ export class ItemCadastrarEditarComponent implements OnInit {
 
     salvar() {
         if (this.item && this.item.id) {
-            this.itemService.atualizar(this.formGroup.value).subscribe(
-                (itemAtualizado) => {
+            this.itemService.atualizar(this.formGroup.value).subscribe({
+                next: (itemAtualizado) => {
                     this.matSnackBar.open("Atualizado com sucesso!", null, {
                         duration: 5000,
                         panelClass: "green-snackbar",
                     });
                     this.router.navigateByUrl("/itens");
                 },
-                (error) => {
+                error: (error) => {
                     this.matSnackBar.open("Erro ao atualizar", null, {
                         duration: 5000,
                         panelClass: "red-snackbar",
                     });
-                }
-            );
+                },
+            });
         } else {
-            this.itemService.cadastrar(this.formGroup.value).subscribe(
-                (itemCadastrado) => {
+            this.itemService.cadastrar(this.formGroup.value).subscribe({
+                next: (itemCadastrado) => {
                     this.matSnackBar.open("Cadastrado com sucesso!", null, {
                         duration: 5000,
                         panelClass: "green-snackbar",
                     });
                     this.router.navigateByUrl("/itens");
                 },
-                (error) => {
+                error: (error) => {
                     this.matSnackBar.open("Erro ao cadastrar", null, {
                         duration: 5000,
                         panelClass: "red-snackbar",
                     });
-                }
-            );
+                },
+            });
         }
     }
 
@@ -73,21 +73,21 @@ export class ItemCadastrarEditarComponent implements OnInit {
 
         dialogoReferencia.afterClosed().subscribe((valorResposta) => {
             if (valorResposta) {
-                this.itemService.deletar(this.item).subscribe(
-                    (response) => {
+                this.itemService.deletar(this.item).subscribe({
+                    next: (response) => {
                         this.matSnackBar.open("Item deletado com sucesso!", null, {
                             duration: 5000,
                             panelClass: "green-snackbar",
                         });
                         this.router.navigateByUrl("/itens");
                     },
-                    (error) => {
+                    error: (error) => {
                         this.matSnackBar.open("Erro ao deletar", null, {
                             duration: 5000,
                             panelClass: "red-snackbar",
                         });
-                    }
-                );
+                    },
+                });
             }
         });
     }

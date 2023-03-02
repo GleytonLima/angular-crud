@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { ItemService } from "../../item.service";
 import { Item } from "../../item.model";
 import { Page, PageRequest } from "src/app/_util/Pagination";
-import { LegacyPageEvent as PageEvent } from "@angular/material/legacy-paginator";
+import { PageEvent } from "@angular/material/paginator";
 import { take } from "rxjs/operators";
 import { Sort } from "@angular/material/sort";
-import { MatLegacySnackBar as MatSnackBar } from "@angular/material/legacy-snack-bar";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { UntypedFormGroup, UntypedFormBuilder } from "@angular/forms";
 
 @Component({
@@ -24,7 +24,11 @@ export class ItemListarComponent implements OnInit {
 
     formGroupPesquisa: UntypedFormGroup;
 
-    constructor(private itemService: ItemService, private matSnackBar: MatSnackBar, private formBuilder: UntypedFormBuilder) {}
+    constructor(
+        private itemService: ItemService,
+        private matSnackBar: MatSnackBar,
+        private formBuilder: UntypedFormBuilder
+    ) {}
 
     ngOnInit() {
         this.formGroupPesquisa = this.formBuilder.group({
@@ -59,19 +63,19 @@ export class ItemListarComponent implements OnInit {
                 )
             )
             .pipe(take(1))
-            .subscribe(
-                (page) => {
+            .subscribe({
+                next: (page) => {
                     this.page = page;
                     this.carregando = false;
                 },
-                (error) => {
+                error: (error) => {
                     this.page = new Page([], 0);
                     this.carregando = false;
                     this.matSnackBar.open("Erro ao listar itens", null, {
                         duration: 5000,
                         panelClass: "red-snackbar",
                     });
-                }
-            );
+                },
+            });
     }
 }
